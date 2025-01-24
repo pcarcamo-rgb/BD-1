@@ -1,11 +1,11 @@
 {
   "name": "bd-1",
   "version": "1.0.0",
-  "main": "dist/infraestructure/express/server.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node dist/infraestructure/express/server.js",
+    "start": "node dist/main.js",
     "build": "tsc",
-    "dev": "nodemon src/infraestructure/express/server.ts"
+    "dev": "nodemon src/main.ts"
   },
   "keywords": [],
   "author": "",
