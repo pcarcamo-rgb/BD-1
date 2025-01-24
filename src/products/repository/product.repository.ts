@@ -9,6 +9,5 @@ export interface ProductRepository {
     id: string,
     updateProductDto: UpdateProductDto
   ): Promise<Product | null>;
-
   delete(id: string): Promise<void>;
 }

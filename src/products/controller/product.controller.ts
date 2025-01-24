@@ -9,11 +9,11 @@ import { UpdateProduct } from "../use-cases/UpdateProduct";
 
 export class ProductController {
   constructor(
-    private readonly createProduct: CreateProduct,
-    private readonly getProduct: GetProduct,
-    private readonly getProductById: GetProductByID,
-    private readonly updateProduct: UpdateProduct,
-    private readonly deleteProduct: DeleteProduct
+    readonly createProduct: CreateProduct,
+    readonly getProduct: GetProduct,
+    readonly getProductById: GetProductByID,
+    readonly updateProduct: UpdateProduct,
+    readonly deleteProduct: DeleteProduct
   ) {}
 
   async create(req: Request, res: Response) {
