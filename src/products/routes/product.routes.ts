@@ -1,16 +1,15 @@
 import express from "express";
 import { ProductController } from "../controller/product.controller";
-import { InMemoryProductRepository } from "../repository/inMemoryProduct.repository";
 import { CreateProduct } from "../use-cases/CreateProduct";
 import { DeleteProduct } from "../use-cases/DeleteProduct";
 import { GetProduct } from "../use-cases/GetProduct";
 import { GetProductByID } from "../use-cases/GetProductByID";
 import { UpdateProduct } from "../use-cases/UpdateProduct";
+import { JsonProductRepository } from "../repository/JsonProduct.repository";
 
 const productRouter = express.Router();
 
-const productRepository: InMemoryProductRepository =
-  new InMemoryProductRepository();
+const productRepository: JsonProductRepository = new JsonProductRepository();
 
 const createProductUseCase = new CreateProduct(productRepository);
 const getProductUseCase = new GetProduct(productRepository);

@@ -60,7 +60,9 @@ export class ProductController {
     try {
       const id = req.params.id;
       await this.deleteProduct.execute(id);
-      return res.sendStatus(204);
+      return res
+        .status(200)
+        .json({ status: 200, message: `Product with id ${id} deleted` });
     } catch (error) {
       return this.handleError(res, error);
     }

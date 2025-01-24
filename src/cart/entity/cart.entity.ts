@@ -1,7 +1,5 @@
-interface CartInterface {
-  id: string;
-}
+import { ProductQuantity } from "../interface/cart-product.interface";
 
 export class Cart {
-  constructor(public products: CartInterface[]) {}
+  constructor(public id: string, public products: ProductQuantity[]) {}
 }

@@ -1,3 +1,5 @@
 /node_modules
 /.env
 /dist
+/db/cart.json
+/db/products.json
