@@ -1,10 +1,11 @@
-import { promises as fs } from "fs"; // Para manejar operaciones de archivo asíncronas
-import path from "path"; // Para manejar rutas de archivo
+import { promises as fs } from "fs";
+import path from "path";
 import { UpdateProductDto } from "../dto/update-product.dto";
 import { Product } from "../entity/product.entity";
 import { ProductRepository } from "./product.repository";
 
 const PRODUCTS_FILE_PATH = path.join(__dirname, "../../../db/products.json");
+const DB_DIRECTORY = path.join(__dirname, "../../../db");
 
 export class JsonProductRepository implements ProductRepository {
   constructor() {
@@ -12,6 +13,21 @@ export class JsonProductRepository implements ProductRepository {
   }
 
   private async initializeProductsFile(): Promise<void> {
+    try {
+      await fs.access(DB_DIRECTORY);
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        await fs.mkdir(DB_DIRECTORY, { recursive: true });
+        console.log("Carpeta 'db' creada exitosamente.");
+      } else {
+        throw error;
+      }
+    }
+
     try {
       await fs.readFile(PRODUCTS_FILE_PATH, "utf-8");
     } catch (error) {

@@ -17,7 +17,7 @@ const getProductByIdUseCase = new GetProductByID(productRepository);
 const updateProductUseCase = new UpdateProduct(productRepository);
 const deleteProductUseCase = new DeleteProduct(productRepository);
 
-const productController = new ProductController(
+export const productController = new ProductController(
   createProductUseCase,
   getProductUseCase,
   getProductByIdUseCase,

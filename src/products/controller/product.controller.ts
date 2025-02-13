@@ -6,6 +6,7 @@ import { DeleteProduct } from "../use-cases/DeleteProduct";
 import { GetProduct } from "../use-cases/GetProduct";
 import { GetProductByID } from "../use-cases/GetProductByID";
 import { UpdateProduct } from "../use-cases/UpdateProduct";
+import { io } from "../../main";
 
 export class ProductController {
   constructor(
@@ -20,7 +21,8 @@ export class ProductController {
     try {
       const productData: CreateProductDto = req.body;
       const result = await this.createProduct.execute(productData);
-      return res.status(201).json(result);
+      res.status(201).json(result);
+      this.emitUpdatedProducts();
     } catch (error) {
       return this.handleError(res, error);
     }
@@ -31,7 +33,8 @@ export class ProductController {
       const id = req.params.id;
       const productData: UpdateProductDto = req.body;
       const result = await this.updateProduct.execute(id, productData);
-      return res.json(result);
+      res.json(result);
+      this.emitUpdatedProducts();
     } catch (error) {
       return this.handleError(res, error);
     }
@@ -60,9 +63,10 @@ export class ProductController {
     try {
       const id = req.params.id;
       await this.deleteProduct.execute(id);
-      return res
+      res
         .status(200)
         .json({ status: 200, message: `Product with id ${id} deleted` });
+      this.emitUpdatedProducts();
     } catch (error) {
       return this.handleError(res, error);
     }
@@ -83,5 +87,17 @@ export class ProductController {
       status: 500,
       error: "Internal Server Error",
     });
+  }
+
+  private async emitUpdatedProducts() {
+    try {
+      const updatedProducts = await this.getProduct.execute();
+
+      io.emit("products", updatedProducts);
+
+      console.error("Socket.IO not initialized properly");
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
