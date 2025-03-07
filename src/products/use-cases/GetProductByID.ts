@@ -1,7 +1,7 @@
-import { JsonProductRepository } from "../repository/JsonProduct.repository";
+import { MongoProductRepository } from "../repository/mongoProduct.repository";
 
 export class GetProductByID {
-  constructor(private productRepository: JsonProductRepository) {}
+  constructor(private productRepository: MongoProductRepository) {}
   async execute(id: string) {
     if (!id) throw new Error("Product ID is required");
 

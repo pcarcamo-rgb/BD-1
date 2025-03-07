@@ -40,10 +40,18 @@ export class ProductController {
     }
   }
 
-  async findAll(_req: Request, res: Response) {
+  async findAll(req: Request, res: Response) {
     try {
-      const result = await this.getProduct.execute();
-      return res.json(result);
+      const { limit, page, sort, query } = req.query;
+
+      const products = await this.getProduct.execute(
+        limit ? Number(limit) : undefined,
+        page ? Number(page) : undefined,
+        sort ? String(sort) : undefined,
+        query ? String(query) : undefined
+      );
+
+      return res.json(products);
     } catch (error) {
       return this.handleError(res, error);
     }

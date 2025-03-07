@@ -1,10 +1,10 @@
 import { CreateProductDto } from "../dto/create-product.dto";
 import { Product } from "../entity/product.entity";
-import { JsonProductRepository } from "../repository/JsonProduct.repository";
 import { v4 } from "uuid";
+import { MongoProductRepository } from "../repository/mongoProduct.repository";
 
 export class CreateProduct {
-  constructor(private productRepository: JsonProductRepository) {}
+  constructor(private productRepository: MongoProductRepository) {}
 
   async execute(product: CreateProductDto) {
     if (!product.title?.trim()) {

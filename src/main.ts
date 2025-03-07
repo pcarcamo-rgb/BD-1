@@ -6,8 +6,12 @@ import cartRouter from "./cart/routes/cart.routes";
 import { Server } from "socket.io";
 import path from "path";
 import viewRouter from "./views/router/view.routes";
+import MongoConnection from "./db";
 
 const app = express();
+const mongoConnection = MongoConnection.getInstance();
+
+mongoConnection.connect();
 
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));

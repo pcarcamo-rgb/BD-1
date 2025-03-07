@@ -5,11 +5,11 @@ import { DeleteProduct } from "../use-cases/DeleteProduct";
 import { GetProduct } from "../use-cases/GetProduct";
 import { GetProductByID } from "../use-cases/GetProductByID";
 import { UpdateProduct } from "../use-cases/UpdateProduct";
-import { JsonProductRepository } from "../repository/JsonProduct.repository";
+import { MongoProductRepository } from "../repository/mongoProduct.repository";
 
 const productRouter = express.Router();
 
-const productRepository: JsonProductRepository = new JsonProductRepository();
+const productRepository: MongoProductRepository = new MongoProductRepository();
 
 const createProductUseCase = new CreateProduct(productRepository);
 const getProductUseCase = new GetProduct(productRepository);

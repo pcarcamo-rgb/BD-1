@@ -1,8 +1,8 @@
 import { UpdateProductDto } from "../dto/update-product.dto";
-import { JsonProductRepository } from "../repository/JsonProduct.repository";
+import { MongoProductRepository } from "../repository/mongoProduct.repository";
 
 export class UpdateProduct {
-  constructor(private productRepository: JsonProductRepository) {}
+  constructor(private productRepository: MongoProductRepository) {}
   async execute(id: string, updateProductDto: UpdateProductDto) {
     if (!id) throw new Error("Product ID is required");
 

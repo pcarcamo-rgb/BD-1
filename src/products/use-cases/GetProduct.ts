@@ -1,9 +1,9 @@
-import { JsonProductRepository } from "../repository/JsonProduct.repository";
+import { MongoProductRepository } from "../repository/mongoProduct.repository";
 
 export class GetProduct {
-  constructor(private productRepository: JsonProductRepository) {}
+  constructor(private productRepository: MongoProductRepository) {}
 
-  async execute() {
-    return await this.productRepository.findAll();
+  async execute(limit?: number, page?: number, sort?: string, query?: string) {
+    return this.productRepository.findAll(limit, page, sort, query);
   }
 }
